@@ -1,0 +1,46 @@
+<div class='container'>
+    <div class='card card-primary'>
+        <div class='card-header'>
+            <h3>Author List</h3>
+        </div>
+        <div class='card-body'>
+            <form class='form-inline'>
+                <div class='form-group mb-4'>
+                    <input type='text'
+                        class='form-control'
+                        placeholder='Filter usernames by...'
+                        [(ngModel)]="listFilter"
+                        name = "list-filter">
+                </div>
+            </form>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Author ID</th>
+                        <th scope='col'>Name</th>
+                        <th scope='col'>Username</th>
+                        <th scope='col'></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let author of pagedItems'>
+                        <th>{{author._id}}</th>
+                        <th>{{author.firstName + " " + author.lastName}}</th>
+                        <th>{{author.username}}</th>
+                        <th><button [routerLink]="['/author',author.username]"
+                            class='btn btn-secondary'>View details</button></th>
+                    </tr>
+                </tbody>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item" (click)='setPage(1)'><a class="page-link">First</a></li>
+                        <li *ngFor='let page of pager.pageNumbers'
+                            class="page-item"
+                            (click)='setPage(page)'><a class='page-link'>{{page}}</a></li>
+                        <li class="page-item" (click)='setPage(pager.totalPages)'><a class="page-link">Last</a></li>
+                    </ul>
+                </nav>
+            </table>
+        </div>
+    </div>
+</div>
