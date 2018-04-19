@@ -54,7 +54,7 @@ export class AuthorListComponent implements OnInit {
     }
 
     setPage(pageNumber:number){
-        if(pageNumber<1 || pageNumber > this.pager.totalPages){
+        if(pageNumber<1 || (pageNumber > this.pager.totalPages && this.pager.totalPages > 0)){
             return;
         }
         this.pager = this._paginationService.getPageSetup(this.filteredAuthors, pageNumber);

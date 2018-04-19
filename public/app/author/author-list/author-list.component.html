@@ -13,6 +13,7 @@
                         name = "list-filter">
                 </div>
             </form>
+            <div *ngIf='pager.totalItems===0' class="alert alert-danger">Your search did not return any authors!</div>
             <table class='table'>
                 <thead>
                     <tr>
