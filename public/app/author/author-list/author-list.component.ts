@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Author } from './../author';
-import { Observable } from 'rxjs/Observable';
-
 import { AuthorService } from './../../services/AuthorService';
 import { PaginationService } from "../../services/PaginationService";
 
@@ -13,7 +11,6 @@ import { PaginationService } from "../../services/PaginationService";
 export class AuthorListComponent implements OnInit {
     allAuthors: Author[];
     filteredAuthors: Author[];
-    currentPageOfAuthors: Author[];
 
     _listFilter: string;
     pager: any = {};

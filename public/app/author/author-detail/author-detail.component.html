@@ -1,1 +1,10 @@
-<p>AUTHOR NAME: {{author.firstName + author.lastName}}!</p>
+<div class="container" *ngIf="loaded">
+    <p>AUTHOR NAME: {{author.firstName}} {{author.lastName}}!</p>
+    <p>Description: something something something!</p>
+    <p>Books:</p>
+    <ul>
+        <li *ngFor="let book of books">
+            <p>{{book.title}}</p>
+        </li>
+    </ul>
+</div>
