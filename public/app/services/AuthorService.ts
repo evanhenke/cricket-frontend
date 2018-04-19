@@ -13,7 +13,6 @@ export class AuthorService {
     constructor(private _http: HttpClient) { }
 
     getAllAuthors(): Observable<Author[]> {
-        // noinspection TypeScriptUnresolvedFunction
         return this._http.get<Author[]>(this.userEndpoint)
             .do(data=>console.log('data is ' + JSON.stringify(data)))
             .catch((error)=>{
@@ -23,7 +22,6 @@ export class AuthorService {
     }
 
     getAuthorByUsername(str: String): Observable<Author> {
-        // noinspection TypeScriptUnresolvedFunction
         return this._http.get<Author>(this.userEndpoint+str)
             .do(data=>console.log('data is ' + JSON.stringify(data)))
             .catch((error)=>{
