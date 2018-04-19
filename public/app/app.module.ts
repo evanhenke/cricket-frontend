@@ -18,6 +18,8 @@ import { PopularBooksComponent } from './book/popular-books/popular-books.compon
 
 import { AuthorService } from './services/AuthorService';
 import { PaginationService } from './services/PaginationService';
+import { BookService } from "./services/BookService";
+import {Book} from "./book/book";
 
 @NgModule({
     imports:[
@@ -39,7 +41,8 @@ import { PaginationService } from './services/PaginationService';
     ],
     providers:[
         AuthorService,
-        PaginationService
+        PaginationService,
+        BookService
     ],
     bootstrap:[AppComponent]
 })
