@@ -1,36 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Book } from '../book';
+import { BookService } from "../../services/BookService";
 
 @Component({
     selector:'app-popular-books',
     templateUrl:'./popular-books.component.html'
 })
-export class PopularBooksComponent {
+export class PopularBooksComponent implements OnInit {
     imageSize:number=300;
-    books: Book[] = [
-        {
-            _id:1,
-            authorId:1,
-            title:"This is a good book!",
-            description:"This book is supposed to be super good, you should read it!",
-            rating:5,
-            imageUrl:"https://www.arborday.org/images/hero/medium/hero-ring-of-trees-looking-up.jpg"
-        },
-        {
-            _id:2,
-            authorId:2,
-            title:"This book is okay.",
-            description:"This book decent. You could read better, but you could also read worse.",
-            rating:1,
-            imageUrl:"https://cdn.shopify.com/s/files/1/1061/1924/files/Neutral_Face_Emoji.png?9898922749706957214"
-        },
-        {
-            _id:3,
-            authorId:3,
-            title:"This book is garbage :(",
-            description:"This book is horrible, you probably shouldn't read it.",
-            rating:1,
-            imageUrl:"https://img00.deviantart.net/da7b/i/2004/242/7/d/299_dumpster.jpg"
+    books:Book[];
+    _bookService:BookService;
+    newestBooks:Book[];
+
+    constructor (
+        _bookService:BookService
+    ) {
+        this._bookService = _bookService;
+    }
+
+    ngOnInit(){
+        this._bookService.getAllBooks()
+            .subscribe((books:Book[]) => {
+                this.books = books;
+                this.newestBooks = this.getNewestBooks(3);
+            },
+                error => console.log(error)
+            );
+    }
+
+    getNewestBooks (num:number):Book[] {
+        return this.books.sort((a,b) => { return this.compare(a.createDate,b.createDate); });
+    }
+
+    compare (a:Date,b:Date): number {
+        if(a > b){
+            return 1;
+        } else if (a < b) {
+            return -1;
         }
-    ];
+        return 0;
+    }
 }

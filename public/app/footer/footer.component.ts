@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     templateUrl:'./footer.component.html'
 })
 export class FooterComponent {
-    footerTempText: string = "All images are placeholders and copywrite infringement is unintended.";
+    footerTempText: string = "All images are placeholders and copyright infringement is unintended.";
 }

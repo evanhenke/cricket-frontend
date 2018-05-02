@@ -2,14 +2,14 @@
     <div class='row'>
         <div *ngFor='let book of books' class='col'>
             <div class='card'>
-                <img class='card-img-top' [src]='book.imageUrl' [style.height.px]='imageSize' [style.width.px]='imageSize'>
+                <img class='card-img-top' [style.height.px]='imageSize' [style.width.px]='imageSize'>
                 <div class='card-body'>
                     <h4 class='card-title'>{{book.title}}</h4>
-                    <p class='card-text'>{{book.decription}}</p>
+                    <!--<p class='card-text'>{{book.description}}</p>-->
                     <ul>
                         <li>AuthorID: {{book.authorId}}</li>
-                        <li>BookID: {{book.id}}</li>
-                        <li>Rating: {{book.rating}}</li>
+                        <li>BookID: {{book._id}}</li>
+                        <!--<li>Rating: {{book.rating}}</li>-->
                     </ul>
                 </div>
             </div>
