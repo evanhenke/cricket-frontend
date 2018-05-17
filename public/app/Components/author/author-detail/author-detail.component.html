@@ -1,6 +1,7 @@
 <div class="container" *ngIf="loaded">
     <p>AUTHOR NAME: {{author.firstName}} {{author.lastName}}!</p>
-    <p>Description: something something something!</p>
+    <p>USERNAME: {{author.username}}</p>
+    <p>DESCRIPTION: something something something!</p>
     <p>Books:</p>
     <ul>
         <li *ngFor="let book of books">
