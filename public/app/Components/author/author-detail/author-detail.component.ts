@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Author } from './../author';
-import { Book } from './../../book/book';
+import { Author } from '../../../Classes/Author';
+import { Book } from '../../../Classes/Book';
 import { ActivatedRoute } from '@angular/router';
-import { AuthorService } from "../../services/AuthorService";
-import { BookService } from "../../services/BookService";
+import { AuthorService } from "../../../Services/AuthorService";
+import { BookService } from "../../../Services/BookService";
 
 @Component({
     selector: 'author-detail',

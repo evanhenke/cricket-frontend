@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
+ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Author } from './../author/author';
+import { Book } from '../Classes/Book';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class AuthorService {
-    userEndpoint:string = "https://cricket-backend.herokuapp.com/api/user/";
+export class BookService{
+    bookEndpoint:string = "https://cricket-backend.herokuapp.com/api/book/";
 
     constructor(private _http: HttpClient) { }
 
-    getAllAuthors(): Observable<Author[]> {
+    getAllBooks(): Observable<Book[]> {
         // noinspection TypeScriptUnresolvedFunction
-        return this._http.get<Author[]>(this.userEndpoint)
+        return this._http.get<Book[]>(this.bookEndpoint)
             .do(data=>console.log('data is ' + JSON.stringify(data)))
             .catch((error)=>{
                 this.handleError(error);
@@ -22,9 +22,9 @@ export class AuthorService {
             });
     }
 
-    getAuthorByUsername(str: String): Observable<Author> {
+    getBooksByUsername(str: String): Observable<Book[]> {
         // noinspection TypeScriptUnresolvedFunction
-        return this._http.get<Author>(this.userEndpoint+str)
+        return this._http.get<Book[]>(this.bookEndpoint+str)
             .do(data=>console.log('data is ' + JSON.stringify(data)))
             .catch((error)=>{
                 this.handleError(error);

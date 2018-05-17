@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Author } from './../author';
-import { AuthorService } from './../../services/AuthorService';
-import { PaginationService } from "../../services/PaginationService";
+import { Author } from '../../../Classes/Author';
+import { AuthorService } from '../../../Services/AuthorService';
+import { PaginationService } from "../../../Services/PaginationService";
 
 
 @Component({

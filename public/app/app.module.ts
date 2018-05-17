@@ -1,48 +1,42 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from './Modules/routing/app-routing.module';
+import { ReadingModule } from "./Modules/reading.module";
+import { WritingModule } from "./Modules/writing.module";
+import { SharedModule } from "./Modules/shared.module";
+
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './navigationbar/navigationbar.component';
-import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from "./Components/home/home.component";
+import { NavigationBarComponent } from "./Components/frame/navigationbar/navigationbar.component";
+import { FooterComponent } from "./Components/frame/footer/footer.component";
 
-import { HomeComponent } from './home/home.component';
-import { WriterComponent } from './writer/writer.component';
-import { ReaderComponent } from './reader/reader.component';
-
-import { AuthorListComponent } from './author/author-list/author-list.component';
-import { AuthorDetailComponent } from './author/author-detail/author-detail.component';
-import { PopularBooksComponent } from './book/popular-books/popular-books.component';
-
-import { AuthorService } from './services/AuthorService';
-import { PaginationService } from './services/PaginationService';
-import { BookService } from "./services/BookService";
-import {Book} from "./book/book";
+import { AuthorService } from './Services/AuthorService';
+import { PaginationService } from './Services/PaginationService';
+import { BookService } from "./Services/BookService";
+import { PageService } from "./Services/PageService";
 
 @NgModule({
     imports:[
         BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        ReadingModule,
+        WritingModule,
+        SharedModule,
+        AppRoutingModule
     ],
     declarations:[
         AppComponent,
-        NavigationBarComponent,
-        FooterComponent,
         HomeComponent,
-        WriterComponent,
-        ReaderComponent,
-        AuthorListComponent,
-        AuthorDetailComponent,
-        PopularBooksComponent,
+        NavigationBarComponent,
+        FooterComponent
     ],
     providers:[
         AuthorService,
         PaginationService,
-        BookService
+        BookService,
+        PageService
     ],
     bootstrap:[AppComponent]
 })
