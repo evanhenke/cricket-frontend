@@ -32,6 +32,19 @@ export class BookService{
             });
     }
 
+    createNewBook(title: String, username:String): Observable<Book> {
+        // noinspection TypeScriptUnresolvedFunction
+        return this._http.post(this.bookEndpoint,{
+            username:username,
+            title:title
+        })
+            .do(data=>console.log('data is ' + JSON.stringify(data)))
+            .catch(error=>{
+                this.handleError(error);
+                return Observable.throw(error.statusText);
+            });
+    }
+
     private handleError(error:HttpErrorResponse) {
         alert("handleError in author service says: " + error.message);
     }

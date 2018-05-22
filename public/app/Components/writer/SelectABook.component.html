@@ -21,7 +21,7 @@
                 <div *ngIf="!booksOk">
                     <p>no books for author {{currentAuthor.username}}</p>
                 </div>
-                <input type="button" value="Write a new one!">
+                <input type="button" value="Write a new one!" [routerLink]="['/createabook',currentAuthor.username]">
             </div>
         </form>
     </div>

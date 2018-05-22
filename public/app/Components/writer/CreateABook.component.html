@@ -1,0 +1,8 @@
+<div class="container">
+    <form>
+        <p>What would you like to name your story?</p>
+        <input type="text" name="Title" [(ngModel)]="bookTitle">
+        <p>{{bookTitle}}</p>
+        <input type="button" (click)="createBook()" value="Create!">
+    </form>
+</div>
