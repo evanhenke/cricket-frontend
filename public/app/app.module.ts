@@ -15,7 +15,7 @@ import { FooterComponent } from "./Components/frame/footer/footer.component";
 import { AuthorService } from './Services/AuthorService';
 import { PaginationService } from './Services/PaginationService';
 import { BookService } from "./Services/BookService";
-import { PageService } from "./Services/PageService";
+import { LoginModalComponent } from './Components/account/login-modal.component';
 
 @NgModule({
     imports:[
@@ -30,13 +30,13 @@ import { PageService } from "./Services/PageService";
         AppComponent,
         HomeComponent,
         NavigationBarComponent,
-        FooterComponent
+        FooterComponent,
+        LoginModalComponent
     ],
     providers:[
         AuthorService,
         PaginationService,
-        BookService,
-        PageService
+        BookService
     ],
     bootstrap:[AppComponent]
 })

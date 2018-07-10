@@ -5,5 +5,6 @@ export class Author {
     username: string;
     usernameLowerCase: string;
     password: string;
-    createDate: Date
+    createDate: Date;
+    __v: number;
 }

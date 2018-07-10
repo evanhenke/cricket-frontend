@@ -3,6 +3,8 @@
         <img src="../../../../../C.png">
         {{appTitle}}</a>
     <div class='nav navbar-nav'>
-        <button class='btn btn-secondary'>Sign in</button>
+        <button class='btn btn-secondary' data-toggle="modal" data-target="#signInModal" *ngIf="!loggedIn">Sign in</button>
+        <button class='btn btn-secondary' *ngIf="loggedIn" (click)="logOut()">Log out</button>
+        <button class='btn btn-primary' *ngIf="loggedIn">OMG</button>
     </div>
 </nav>

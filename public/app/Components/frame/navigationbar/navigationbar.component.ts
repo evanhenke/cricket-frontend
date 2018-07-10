@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
 })
 export class NavigationBarComponent {
     appTitle: string = "Cricket";
+    loggedIn: Boolean = false;
+
+    logOut(){ alert('wow'); };
 }

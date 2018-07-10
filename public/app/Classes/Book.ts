@@ -3,4 +3,6 @@ export class Book {
     title:string;
     authorId:number;
     createDate:Date;
+    pages:string[];
+    __v:number;
 }
