@@ -17,6 +17,7 @@ import { AuthorService } from './Services/AuthorService';
 import { PaginationService } from './Services/PaginationService';
 import { BookService } from "./Services/BookService";
 import { AuthenticationService } from './Services/AuthenticationService';
+import { ModalModule } from "ngx-bootstrap/modal";
 
 @NgModule({
     imports:[
@@ -25,7 +26,8 @@ import { AuthenticationService } from './Services/AuthenticationService';
         ReadingModule,
         WritingModule,
         SharedModule,
-        AppRoutingModule
+        AppRoutingModule,
+        ModalModule.forRoot()
     ],
     declarations:[
         AppComponent,

@@ -24,7 +24,7 @@ export class LoginModalComponent {
                 .subscribe((userdata) => {
                     this.author = userdata;
                     this.loginError = false;
-
+                    document.getElementById('closeModal').click();
                 }, (error) => {
                     console.log('uh oh!  login error in component! ' + error.message);
                     this.loginError = true;

@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Author } from '../Classes/Author';
-import { Observable } from 'rxjs/Observable';
+import { Observable, BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AuthenticationService {
-    authEndpoint:string = "http://localhost:3030/api/auth/login";
-    logOutEndpoint:string = "http://localhost:3030/api/auth/logout";
+    authEndpoint:string = "https://cricket-backend.herokuapp.com/api/auth/login";
+    logOutEndpoint:string = "https://cricket-backend.herokuapp.com/api/auth/logout";
     author:Author = null;
+    private source = new BehaviorSubject(this.author);
+    auth = this.source.asObservable();
 
     constructor(private _http: HttpClient) {
         this._http = _http;
@@ -25,6 +27,7 @@ export class AuthenticationService {
             })
             .do((data) => {
                 this.author = data;
+                this.source.next(this.author);
             })
             .catch((error)=>{
                 this.handleError(error);
@@ -33,11 +36,12 @@ export class AuthenticationService {
     }
 
     logOut(): Observable<Author> {
-        if (this.author != null) {
+        if (this.author == null) {
             // noinspection TypeScriptUnresolvedFunction
             return this._http.post<Author>(this.logOutEndpoint, this.author)
                 .do(() => {
                     this.author = null;
+                    this.source.next(this.author);
                 })
                 .catch((error)=>{
                     this.handleError(error);
