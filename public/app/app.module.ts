@@ -11,11 +11,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from "./Components/home/home.component";
 import { NavigationBarComponent } from "./Components/frame/navigationbar/navigationbar.component";
 import { FooterComponent } from "./Components/frame/footer/footer.component";
+import { LoginModalComponent } from './Components/account/login-modal.component';
 
 import { AuthorService } from './Services/AuthorService';
 import { PaginationService } from './Services/PaginationService';
 import { BookService } from "./Services/BookService";
-import { LoginModalComponent } from './Components/account/login-modal.component';
+import { AuthenticationService } from './Services/AuthenticationService';
 
 @NgModule({
     imports:[
@@ -36,7 +37,8 @@ import { LoginModalComponent } from './Components/account/login-modal.component'
     providers:[
         AuthorService,
         PaginationService,
-        BookService
+        BookService,
+        AuthenticationService
     ],
     bootstrap:[AppComponent]
 })
