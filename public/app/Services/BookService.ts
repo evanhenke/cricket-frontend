@@ -1,17 +1,18 @@
  import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Book } from '../Classes/Book';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+ import { HTTPService } from './HTTPService';
 
 @Injectable()
 export class BookService{
     bookEndpoint:string = "https://cricket-backend.herokuapp.com/api/book/";
     bookAuthEndpoint:string = "https://cricket-backend.herokuapp.com/api/auth/book/";
 
-    constructor(private _http: HttpClient) {
+    constructor(private _http: HTTPService) {
         this._http = _http;
     }
 
@@ -37,7 +38,7 @@ export class BookService{
 
     createNewBook(title: String, authorId:String): Observable<Book> {
         // noinspection TypeScriptUnresolvedFunction
-        return this._http.post(this.bookAuthEndpoint,{
+        return this._http.post<Book>(this.bookAuthEndpoint,{
             authorId:authorId,
             title:title
         })
@@ -50,7 +51,7 @@ export class BookService{
 
     updateBook(book: Book): Observable<Book> {
         // noinspection TypeScriptUnresolvedFunction
-        return this._http.put(this.bookAuthEndpoint,book)
+        return this._http.put<Book>(this.bookAuthEndpoint,book)
             .do((data) => { console.log(`data is ${JSON.stringify(data)}`); })
             .catch((error) => {
                 this.handleError(error);
@@ -60,7 +61,7 @@ export class BookService{
 
     deleteBook(book: Book): Observable<Book> {
         // noinspection TypeScriptUnresolvedFunction
-        return this._http.request('delete',this.bookAuthEndpoint,{ body: book })
+        return this._http.delete(this.bookAuthEndpoint,{ body: book })
             .do((data) => { console.log(`data is ${JSON.stringify(data)}`); })
             .catch((error) => {
                 this.handleError(error);

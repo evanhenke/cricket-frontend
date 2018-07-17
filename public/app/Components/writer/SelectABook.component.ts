@@ -1,67 +1,37 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthorService} from "../../Services/AuthorService";
-import {Author} from "../../Classes/Author";
-import {BookService} from "../../Services/BookService";
-import {Book} from "../../Classes/Book";
+import { Component, OnInit } from '@angular/core';
+import { AuthorService } from '../../Services/AuthorService';
+import { Author } from '../../Classes/Author';
+import { BookService } from '../../Services/BookService';
+import { Book } from '../../Classes/Book';
+import { AuthenticationService } from '../../Services/AuthenticationService';
 
 @Component({
     selector:'app-select-a-book',
     templateUrl:'./SelectABook.component.html'
 })
 export class SelectABookComponent implements OnInit {
-    loaded:Boolean = false;
-    authorOk:Boolean = false;
-    currentAuthor:Author = null;
-    authors:Author[];
+    loaded: boolean = false;
+    author: Author = null;
     books:Book[];
-    booksOk:Boolean = false;
-    currentBook:Book = null;
-    bookOk:Boolean = false;
+    currentBookTitle: string;
 
     constructor(
         private _authorService: AuthorService,
-        private _bookService: BookService){
+        private _bookService: BookService,
+        private _authenticationService: AuthenticationService
+    ){
         this._authorService = _authorService;
         this._bookService = _bookService;
+        this._authenticationService = _authenticationService;
     }
 
     ngOnInit(){
-        this._authorService.getAllAuthors()
-            .subscribe(authors =>{
+        this._authenticationService.auth.subscribe((author) => {
+            this.author = author;
+            this._bookService.getBooksByUsername(author.username).subscribe((books) => {
+                this.books = books;
                 this.loaded = true;
-                this.authors = authors;
-            }, error => console.log(error));
-    }
-
-    get authorUsername(): string  { if(this.currentAuthor!=null) return this.currentAuthor.username; }
-    set authorUsername(username:string) {
-        this._authorService.getAuthorByUsername(username)
-            .subscribe(author=>{
-                this.currentAuthor = author;
-                this.authorOk = true;
-                this._bookService.getBooksByUsername(username)
-                    .subscribe(books=>{
-                        this.books = books;
-                        this.booksOk = books.length>0 ? true : false;
-                    },error=>{
-                        console.log(error)
-                        this.books = null;
-                        this.booksOk = false;
-                    });
-            },error => {
-                console.log(error);
-                this.authorOk = false;
-                this.currentAuthor = null;
-            });
-    }
-
-    get currentBookTitle():String { if(this.currentBook!=null) return this.currentBook.title; }
-    set currentBookTitle(bookTitle:String) {
-        if(this.booksOk)
-            this.books.forEach(book => {
-                if(book.title === bookTitle){
-                    this.currentBook=book;
-                }
             })
+        });
     }
 }

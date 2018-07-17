@@ -4,13 +4,9 @@
     </div>
     <div class='panel-body'>
         <form *ngIf="loaded">
-            <p>Select an author to write for...</p>
-            <select name="Authors" [(ngModel)]="authorUsername">
-                <option *ngFor="let author of authors">{{author.username}}</option>
-            </select>
-            <div *ngIf="authorOk">
-                <p>Author username: {{currentAuthor.username}}, Author name: {{currentAuthor.firstName + " " + currentAuthor.lastName}}</p>
-                <div *ngIf="booksOk">
+            <div>
+                <p>Author username: {{author.username}}, Author name: {{author.firstName + " " + author.lastName}}</p>
+                <div>
                     <p>Work on one of the following books: </p>
                     <select name="Books" [(ngModel)]="currentBookTitle">
                         <option *ngFor="let book of books">{{book.title}}</option>
@@ -18,10 +14,10 @@
                     <input type="button" value="Go">
                     <p>OR:</p>
                 </div>
-                <div *ngIf="!booksOk">
-                    <p>no books for author {{currentAuthor.username}}</p>
+                <div *ngIf="books.length<1">
+                    <p>no books for author {{author.username}}</p>
                 </div>
-                <input type="button" value="Write a new one!" [routerLink]="['/createabook',currentAuthor.username]">
+                <input type="button" value="Write a new one!" [routerLink]="['/createabook',author.username]">
             </div>
         </form>
     </div>

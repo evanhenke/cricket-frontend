@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Author } from '../Classes/Author';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
-import { Book } from '../Classes/Book';
+import { HTTPService } from './HTTPService';
 
 @Injectable()
 export class AuthorService {
     userEndpoint:string = "https://cricket-backend.herokuapp.com/api/user/";
     userAuthEndpoint:string = "https://cricket-backend.herokuapp.com/api/auth/user/";
 
-    constructor(private _http: HttpClient) {
+    constructor(private _http: HTTPService) {
         this._http = _http;
     }
 
@@ -38,7 +38,7 @@ export class AuthorService {
 
     updateAuthor(author: Author): Observable<Author> {
         // noinspection TypeScriptUnresolvedFunction
-        return this._http.put(this.userAuthEndpoint,author)
+        return this._http.put<Author>(this.userAuthEndpoint,author)
             .do((data)=>{ console.log(`data is ${JSON.stringify(data)}`); })
             .catch((error) => {
                 this.handleError(error);
@@ -48,7 +48,7 @@ export class AuthorService {
 
     deleteAuthor(author: Author): Observable<Author> {
         // noinspection TypeScriptUnresolvedFunction
-        return this._http.request('delete',this.userAuthEndpoint,{ body: author })
+        return this._http.delete<Author>(this.userAuthEndpoint,{ body: author })
             .do((data) => { console.log(`data is ${JSON.stringify(data)}`); })
             .catch((error) => {
                 this.handleError(error);

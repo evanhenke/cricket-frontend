@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../Services/AuthenticationService';
 import { Author } from '../../../Classes/Author';
+import { Router } from '@angular/router';
 
 @Component({
     selector:'app-navigationbar',
@@ -10,12 +11,13 @@ export class NavigationBarComponent implements OnInit {
     appTitle: string = "Cricket";
     loggedIn: Boolean = false;
     author: Author = null;
-    _authenticationService;
 
     constructor(
-        _authenticationService:AuthenticationService
+        private _authenticationService:AuthenticationService,
+        private _router: Router
     ) {
         this._authenticationService = _authenticationService;
+        this._router = _router;
     }
 
     ngOnInit() {
@@ -31,5 +33,6 @@ export class NavigationBarComponent implements OnInit {
         this._authenticationService.logOut();
         this.author = null;
         this.loggedIn = false;
+        this._router.navigate(['/home']);
     };
 }

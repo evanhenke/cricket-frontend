@@ -2,9 +2,13 @@
     <a class='navbar-brand' href='/'>
         <img src="../../../../../C.png">
         {{appTitle}}</a>
-    <div class='nav navbar-nav'>
-        <button class='btn btn-secondary' data-toggle="modal" data-target="#signInModal" *ngIf="!loggedIn">Sign in</button>
-        <button class='btn btn-secondary' *ngIf="loggedIn" (click)="logOut()">Log out</button>
-        <button class='btn btn-primary' *ngIf="loggedIn">OMG</button>
+    <div class='nav navbar-nav navbar-collapse justify-content-end'>
+        <div class="btn-toolbar" *ngIf="!loggedIn">
+            <button class='btn btn-secondary' data-toggle="modal" data-target="#signInModal">Sign in</button>
+            <button class="btn btn-default">Wow how neat</button>
+        </div>
+        <div class="btn-toolbar float-right" *ngIf="loggedIn">
+            <button class='btn btn-secondary' (click)="logOut()">Log out</button>
+        </div>
     </div>
 </nav>
